@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Math Tricks — Mental Math Nobody Taught You in School</title>
+<meta name="description" content="Learn quick math tricks, mental math shortcuts, Vedic math techniques, multiplication tricks, and fast calculation methods for students and beginners.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#15335c;
+    --navy-deep:#0d213d;
+    --sky:#4f8fd1;
+    --sky-pale:#e7f0fb;
+    --paper:#ffffff;
+    --mist:#f3f7fc;
+    --ink:#20293a;
+    --ink-soft:#5b6779;
+    --gold:#2f9e8f;
+    --gold-light:#7fe0d2;
+    --line:#e1e8f2;
+    --radius:16px;
+    --shadow: 0 10px 30px -12px rgba(21,51,92,0.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    color:var(--navy-deep);
+    margin:0 0 .5em 0;
+    letter-spacing:-0.01em;
+  }
+  .eq{
+    font-family:'JetBrains Mono',monospace;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .page{display:none;}
+  .page.active{display:block;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+
+  /* ===== calculator-display signature element ===== */
+  .calc-display{
+    background:linear-gradient(160deg,var(--navy-deep),var(--navy) 70%);
+    border-radius:14px;
+    padding:22px 26px;
+    color:#bfe6ff;
+    font-family:'JetBrains Mono',monospace;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), var(--shadow);
+    min-height:96px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .calc-display::before{
+    content:"";
+    position:absolute;inset:0;
+    background:repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  .calc-display .eq-line{font-size:1.3rem;letter-spacing:0.02em;white-space:nowrap;}
+  .calc-display .eq-line .dim{opacity:0.55;}
+  .calc-display .eq-line .hi{color:var(--gold-light);}
+
+  /* ===== header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1120px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;color:var(--navy-deep);}
+  .brand .glyphs{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--gold);letter-spacing:2px;}
+  nav.links{display:flex;gap:28px;align-items:center;}
+  nav.links button{font-size:.95rem;font-weight:500;color:var(--ink-soft);padding:6px 2px;border-bottom:2px solid transparent;transition:.15s;}
+  nav.links button:hover, nav.links button.current{color:var(--navy-deep);border-bottom-color:var(--gold);}
+  .cta-btn{
+    background:var(--navy-deep);color:#fff;padding:10px 20px;border-radius:999px;font-weight:600;font-size:.9rem;
+    transition:.15s;
+  }
+  .cta-btn:hover{background:var(--navy);}
+  .cta-btn.ghost{background:transparent;border:1.5px solid var(--navy-deep);color:var(--navy-deep);}
+  .cta-btn.ghost:hover{background:var(--navy-deep);color:#fff;}
+  .menu-toggle{display:none;font-size:1.4rem;color:var(--navy-deep);}
+
+  /* ===== hero ===== */
+  .hero{padding:72px 0 56px;background:linear-gradient(180deg,var(--mist),#fff 80%);}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;color:var(--sky);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
+  .hero h1{font-size:2.9rem;line-height:1.08;}
+  .hero .tagline{font-size:1.25rem;color:var(--navy);font-weight:500;margin-bottom:18px;font-family:'Fraunces',serif;}
+  .hero p.lead{color:var(--ink-soft);font-size:1.05rem;max-width:46ch;margin-bottom:28px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-visual .calc-display{margin-bottom:14px;}
+  .hero-visual .calc-display .eq-line{font-size:1.15rem;}
+
+  section{padding:64px 0;}
+  .section-head{max-width:640px;margin:0 auto 42px;text-align:center;}
+  .section-head h2{font-size:2rem;}
+  .section-head p{color:var(--ink-soft);}
+  .mist{background:var(--mist);}
+
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;transition:.2s;
+  }
+  .card:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
+  .card h3{font-size:1.1rem;margin-bottom:8px;}
+  .card p{color:var(--ink-soft);font-size:.95rem;margin:0;}
+  .icon-badge{
+    width:42px;height:42px;border-radius:10px;background:var(--sky-pale);color:var(--navy);
+    display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;margin-bottom:14px;
+  }
+
+  .trick-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.2s;display:flex;flex-direction:column;}
+  .trick-card:hover{box-shadow:var(--shadow);transform:translateY(-3px);}
+  .trick-card .thumb{padding:22px;}
+  .trick-card .thumb .calc-display{min-height:70px;padding:16px 18px;}
+  .trick-card .thumb .eq-line{font-size:1rem;}
+  .trick-card .body{padding:0 22px 22px;flex:1;display:flex;flex-direction:column;}
+  .cat-tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--sky);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+  .trick-card h3{font-size:1.05rem;margin-bottom:8px;}
+  .trick-card p{color:var(--ink-soft);font-size:.92rem;flex:1;}
+  .read-link{color:var(--navy-deep);font-weight:600;font-size:.9rem;margin-top:12px;display:inline-flex;align-items:center;gap:6px;}
+  .read-link:hover{color:var(--gold);}
+  .meta-row{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--ink-soft);margin-top:10px;}
+
+  .steps-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .step{text-align:center;}
+  .step .num{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--sky);font-weight:600;line-height:1;}
+
+  .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .audience-grid .card{border-left:3px solid var(--gold);}
+
+  .newsletter{
+    background:var(--navy-deep);color:#eaf1fb;border-radius:24px;padding:52px;text-align:center;
+  }
+  .newsletter h2{color:#fff;}
+  .newsletter p{color:#b9cbe6;max-width:52ch;margin:0 auto 26px;}
+  .nl-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto;}
+  .nl-form input{
+    padding:12px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);color:#fff;font-family:inherit;flex:1;min-width:160px;
+  }
+  .nl-form input::placeholder{color:#8fa4c2;}
+  .nl-form button{background:var(--gold);color:var(--navy-deep);padding:12px 22px;border-radius:999px;font-weight:700;}
+
+  footer{background:var(--navy-deep);color:#a9bdd9;padding:56px 0 28px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px;}
+  footer h4{color:#fff;font-family:'Inter';font-size:.95rem;margin-bottom:14px;letter-spacing:.02em;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;}
+  footer a{color:#a9bdd9;font-size:.9rem;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:22px;font-size:.82rem;text-align:center;color:#7f95b8;}
+
+  /* article & inner pages */
+  .page-hero{padding:52px 0 30px;background:var(--mist);}
+  .breadcrumb{font-size:.85rem;color:var(--ink-soft);margin-bottom:16px;}
+  .breadcrumb button{color:var(--sky);font-weight:600;}
+  .article-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+  .article-wrap h2{font-size:1.5rem;margin-top:2.2em;}
+  .article-wrap h3{font-size:1.15rem;margin-top:1.6em;color:var(--navy);}
+  .article-wrap p{color:var(--ink);margin:0 0 1em;}
+  .worked{
+    background:var(--sky-pale);border-radius:12px;padding:18px 22px;margin:18px 0;font-family:'JetBrains Mono',monospace;
+  }
+  .worked .res{color:var(--navy-deep);font-weight:700;}
+  table.pct{width:100%;border-collapse:collapse;margin:18px 0;}
+  table.pct th,table.pct td{border:1px solid var(--line);padding:10px 14px;text-align:left;font-size:.92rem;}
+  table.pct th{background:var(--mist);}
+  details.practice{
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:10px 0;
+  }
+  details.practice summary{cursor:pointer;font-weight:600;color:var(--navy);}
+  details.practice .ans{margin-top:8px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;}
+  .try-box{
+    background:var(--navy-deep);color:#eaf1fb;border-radius:12px;padding:20px 24px;margin:22px 0;
+  }
+  .try-box strong{color:var(--gold-light);}
+  .takeaway{
+    border-left:3px solid var(--gold);background:var(--mist);padding:16px 20px;border-radius:0 10px 10px 0;margin:24px 0;
+  }
+  .related-box{margin-top:48px;padding-top:28px;border-top:1px solid var(--line);}
+  .related-box h4{font-family:'Fraunces',serif;color:var(--navy-deep);margin-bottom:14px;}
+  .related-links{display:flex;flex-direction:column;gap:8px;}
+  .related-links a{color:var(--sky);font-weight:600;}
+  .related-links a:hover{color:var(--navy-deep);}
+
+  .simple-page{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+  .simple-page h2{font-size:1.3rem;margin-top:1.8em;}
+  .simple-page p, .simple-page li{color:var(--ink-soft);}
+
+  .form-grid{display:grid;gap:14px;max-width:520px;}
+  .form-grid input, .form-grid textarea{
+    padding:12px 14px;border-radius:10px;border:1px solid var(--line);font-family:inherit;font-size:.95rem;
+  }
+  .form-grid button{background:var(--navy-deep);color:#fff;padding:12px;border-radius:10px;font-weight:600;}
+  .form-note{font-size:.82rem;color:var(--ink-soft);margin-top:10px;}
+  .success-msg{display:none;background:var(--sky-pale);color:var(--navy-deep);padding:12px 16px;border-radius:10px;margin-top:14px;font-size:.9rem;}
+
+  .filter-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;}
+  .filter-row button{
+    padding:8px 16px;border-radius:999px;border:1px solid var(--line);font-size:.85rem;font-weight:500;color:var(--ink-soft);
+  }
+  .filter-row button.active{background:var(--navy-deep);color:#fff;border-color:var(--navy-deep);}
+
+  @media (max-width:900px){
+    .hero-grid,.grid-4,.grid-3,.grid-2,.steps-3,.audience-grid,.footer-grid{grid-template-columns:1fr 1fr;}
+    .hero-grid{grid-template-columns:1fr;}
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .grid-4,.grid-3,.grid-2,.steps-3,.audience-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:2.1rem;}
+    .footer-grid{grid-template-columns:1fr;}
+    .newsletter{padding:32px 20px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .card,.trick-card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <div class="brand" onclick="go('home')" style="cursor:pointer;">
+      <span>QUICK MATH TRICKS</span>
+      <span class="glyphs">× ÷ + − =</span>
+    </div>
+    <nav class="links" id="navLinks">
+      <button onclick="go('home')" data-page="home">Home</button>
+      <button onclick="go('about')" data-page="about">About Us</button>
+      <button onclick="go('services')" data-page="services">Services</button>
+      <button onclick="go('blog')" data-page="blog">Blog</button>
+      <button onclick="go('contact')" data-page="contact">Contact</button>
+      <button class="cta-btn" onclick="go('blog')">Start Learning</button>
+    </nav>
+    <button class="menu-toggle" onclick="toggleMobileNav()">☰</button>
+  </div>
+</header>
+
+<!-- ================= HOME ================= -->
+<main id="page-home" class="page active">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Mental Math · Vedic Math · Shortcuts</div>
+        <h1>Quick Math Tricks</h1>
+        <div class="tagline">Mental Math Nobody Taught You in School</div>
+        <p class="lead">The same math, done in your head, in a fraction of the time — a growing library of simple mental math and Vedic math shortcuts, explained with worked examples you can actually use.</p>
+        <div class="hero-ctas">
+          <button class="cta-btn" onclick="go('blog')">Explore Math Tricks</button>
+          <button class="cta-btn ghost" onclick="go('blog')">Read Latest Tricks</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="calc-display"><span class="eq-line"><span class="hi">32</span> <span class="dim">×</span> 11 <span class="dim">=</span> <span class="hi">352</span></span></div>
+        <div class="calc-display"><span class="eq-line">85<span class="dim">²</span> <span class="dim">=</span> <span class="hi">7,225</span></span></div>
+        <div class="calc-display"><span class="eq-line">532 → 235 → 297 → 792 → <span class="hi">1089</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <h2>Make Math Faster. Make Math Easier.</h2>
+        <p>Mental math isn't about memorizing hundreds of formulas. It's about recognizing useful patterns and using efficient calculation strategies.</p>
+      </div>
+      <div class="grid-4">
+        <div class="card"><div class="icon-badge">M</div><h3>Mental Math</h3><p>Calculate common problems quickly in your head.</p></div>
+        <div class="card"><div class="icon-badge">S</div><h3>Smart Shortcuts</h3><p>Learn methods that reduce unnecessary calculation.</p></div>
+        <div class="card"><div class="icon-badge">V</div><h3>Vedic Math</h3><p>Explore traditional calculation techniques and modern applications.</p></div>
+        <div class="card"><div class="icon-badge">C</div><h3>Confidence Building</h3><p>Develop speed, accuracy, and mathematical confidence.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mist">
+    <div class="container">
+      <div class="section-head">
+        <h2>Featured Math Tricks</h2>
+        <p>Six essential shortcuts to get you started.</p>
+      </div>
+      <div class="grid-3" id="featuredGrid"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <h2>Learn the Trick. Understand the Pattern. Use It.</h2>
+      </div>
+      <div class="steps-3">
+        <div class="step"><div class="num">1</div><h3>Learn</h3><p>Understand the mathematical pattern.</p></div>
+        <div class="step"><div class="num">2</div><h3>Practice</h3><p>Work through solved examples.</p></div>
+        <div class="step"><div class="num">3</div><h3>Apply</h3><p>Use the shortcut in real calculations.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mist">
+    <div class="container">
+      <div class="section-head">
+        <h2>Math Tricks for Everyone</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="card"><h3>For Kids</h3><p>Simple and fun tricks that make mathematics less intimidating.</p></div>
+        <div class="card"><h3>For 6th Graders</h3><p>Mental math strategies for classroom calculations and homework.</p></div>
+        <div class="card"><h3>For 7th Graders</h3><p>Useful shortcuts for multiplication, percentages, fractions, and more.</p></div>
+        <div class="card"><h3>For Students</h3><p>Fast calculation techniques for everyday study.</p></div>
+        <div class="card"><h3>For Teachers</h3><p>Ideas for making mathematics lessons more engaging.</p></div>
+        <div class="card"><h3>For Beginners</h3><p>Easy math tricks explained step by step.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <h2>Latest From the Blog</h2>
+      </div>
+      <div class="grid-3" id="latestGrid"></div>
+    </div>
+  </section>
+
+  <section class="mist">
+    <div class="container">
+      <div class="newsletter">
+        <h2>Get Smarter at Math — One Trick at a Time</h2>
+        <p>Get simple mental math tricks, practical shortcuts, and new mathematics lessons delivered to your inbox.</p>
+        <form class="nl-form" onsubmit="event.preventDefault(); this.reset(); alert('Thanks — you are on the list!');">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="Email" required>
+          <button type="submit">Get Math Tricks</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= ABOUT ================= -->
+<main id="page-about" class="page">
+  <section class="page-hero"><div class="container"><h1 style="font-size:2rem;">About Quick Math Tricks</h1></div></section>
+  <div class="simple-page">
+    <p>Quick Math Tricks started from a simple classroom observation: students who struggle with math often aren't struggling with the concepts — they're struggling with the arithmetic that gets in the way of the concepts. A shortcut that turns 30 seconds of multiplication into 3 seconds of pattern-spotting frees up attention for the actual problem.</p>
+    <p>That's what this site collects: shortcuts worth knowing, explained clearly enough that you understand <em>why</em> they work — not just what to do.</p>
+    <p>Our content focuses on:</p>
+    <ul>
+      <li>Mental math</li>
+      <li>Mathematical shortcuts</li>
+      <li>Vedic math techniques</li>
+      <li>Multiplication tricks</li>
+      <li>Percentage tricks</li>
+      <li>Student-friendly mathematics</li>
+      <li>Practical everyday calculations</li>
+    </ul>
+    <p>Every trick on this site is explained with the same structure: <strong>Concept → Method → Solved Example → Practice.</strong> We don't claim every trick works universally — where a shortcut has conditions or limitations, we explain them clearly.</p>
+  </div>
+</main>
+
+<!-- ================= SERVICES ================= -->
+<main id="page-services" class="page">
+  <section class="page-hero"><div class="container"><h1 style="font-size:2rem;">Mathematics Learning Resources</h1></div></section>
+  <section>
+    <div class="container grid-3">
+      <div class="card"><h3>Mental Math Training</h3><p>Improve speed and number sense through practical techniques.</p></div>
+      <div class="card"><h3>Math Tricks for Students</h3><p>Simple shortcuts designed for school-level learners.</p></div>
+      <div class="card"><h3>Vedic Math Techniques</h3><p>Explore traditional calculation methods and their modern educational applications.</p></div>
+      <div class="card"><h3>Multiplication Shortcuts</h3><p>Learn patterns that make multiplication easier.</p></div>
+      <div class="card"><h3>Percentage Tricks</h3><p>Understand practical methods for calculating percentages quickly.</p></div>
+      <div class="card"><h3>Educational Math Content</h3><p>Clear explanations, examples, worksheets, and practice activities.</p></div>
+    </div>
+    <div class="container" style="text-align:center;margin-top:30px;">
+      <button class="cta-btn" onclick="go('blog')">Explore the Blog</button>
+    </div>
+  </section>
+</main>
+
+<!-- ================= BLOG ================= -->
+<main id="page-blog" class="page">
+  <section class="page-hero"><div class="container"><h1 style="font-size:2rem;">Quick Math Tricks Blog</h1></div></section>
+  <section>
+    <div class="container">
+      <div class="filter-row" id="filterRow"></div>
+      <div class="grid-3" id="blogGrid"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= ARTICLE (dynamic) ================= -->
+<main id="page-article" class="page">
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><button onclick="go('home')">Home</button> / <button onclick="go('blog')">Blog</button> / <span id="artCrumb"></span></div>
+      <h1 id="artTitle" style="font-size:2rem;"></h1>
+    </div>
+  </section>
+  <div class="article-wrap" id="artBody"></div>
+</main>
+
+<!-- ================= CONTACT ================= -->
+<main id="page-contact" class="page">
+  <section class="page-hero"><div class="container"><h1 style="font-size:2rem;">Contact Quick Math Tricks</h1></div></section>
+  <section>
+    <div class="container">
+      <p style="max-width:56ch;color:var(--ink-soft);margin-bottom:24px;">Have a question, suggestion, correction, or idea for a future math trick? We'd love to hear from you.</p>
+      <form class="form-grid" onsubmit="event.preventDefault(); document.getElementById('contactSuccess').style.display='block'; this.reset();">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="text" placeholder="Subject" required>
+        <textarea placeholder="Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="success-msg" id="contactSuccess">Thanks for contacting Quick Math Tricks. Your message has been received.</div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= PRIVACY ================= -->
+<main id="page-privacy" class="page">
+  <section class="page-hero"><div class="container"><h1 style="font-size:1.7rem;">Privacy Policy</h1></div></section>
+  <div class="simple-page">
+    <p>This Privacy Policy explains how Quick Math Tricks ("we", "us") handles information collected through this website.</p>
+    <h2>Information We Collect</h2>
+    <p>We may collect information you voluntarily provide through contact forms or newsletter sign-ups, such as your name and email address.</p>
+    <h2>Cookies &amp; Analytics</h2>
+    <p>We may use cookies and analytics tools to understand how visitors use the site and to improve content and performance.</p>
+    <h2>Advertising &amp; Third-Party Services</h2>
+    <p>If third-party advertising or analytics services are used on this site, they may collect information in accordance with their own privacy policies. We do not knowingly integrate services beyond what is actually installed on the site.</p>
+    <h2>Email Subscriptions</h2>
+    <p>If you subscribe to our newsletter, your email is used solely to send you math tips and site updates. You may unsubscribe at any time.</p>
+    <h2>Children's Privacy</h2>
+    <p>This site provides educational content suitable for students, but we do not knowingly collect personal information from children without appropriate parental awareness.</p>
+    <h2>Data Retention &amp; Security</h2>
+    <p>We retain information only as long as necessary for the purposes described here and take reasonable measures to protect it.</p>
+    <h2>Your Rights</h2>
+    <p>You may request access to, correction of, or deletion of your personal information by contacting us.</p>
+    <h2>Policy Updates</h2>
+    <p>This policy may be updated periodically. Continued use of the site indicates acceptance of the current version.</p>
+    <h2>Contact</h2>
+    <p>For privacy questions, please use the contact form on this site. [Owner legal/contact details placeholder]</p>
+  </div>
+</main>
+
+<!-- ================= TERMS ================= -->
+<main id="page-terms" class="page">
+  <section class="page-hero"><div class="container"><h1 style="font-size:1.7rem;">Terms and Conditions</h1></div></section>
+  <div class="simple-page">
+    <h2>Website Use</h2>
+    <p>By using Quick Math Tricks, you agree to use the content for personal, educational purposes.</p>
+    <h2>Educational Content &amp; Accuracy</h2>
+    <p>Content on this site is provided for educational purposes and is not a substitute for formal academic instruction. While we aim for mathematical accuracy, we cannot guarantee the content is free of errors.</p>
+    <h2>Intellectual Property</h2>
+    <p>All original content on this site is the property of Quick Math Tricks unless otherwise noted.</p>
+    <h2>User-Generated Content</h2>
+    <p>Any content submitted through contact forms may be used to improve the site and respond to inquiries.</p>
+    <h2>External Links</h2>
+    <p>This site may link to external resources. We are not responsible for the content or practices of external sites.</p>
+    <h2>Limitation of Liability</h2>
+    <p>Quick Math Tricks is not liable for any damages arising from the use of this site or reliance on its content.</p>
+    <h2>Prohibited Use</h2>
+    <p>Do not use this site for unlawful purposes or in a way that could damage or impair the site.</p>
+    <h2>Changes</h2>
+    <p>We may update the website or these terms at any time without prior notice.</p>
+    <h2>Governing Law</h2>
+    <p>[Governing law placeholder]</p>
+    <h2>Contact</h2>
+    <p>Please use the contact form for questions about these terms.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:#fff;margin-bottom:10px;">QUICK MATH TRICKS</div>
+        <p style="color:#8fa4c2;font-size:.9rem;max-width:32ch;">Making mathematics faster, simpler, and more enjoyable.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a onclick="go('home')">Home</a></li>
+          <li><a onclick="go('about')">About Us</a></li>
+          <li><a onclick="go('services')">Services</a></li>
+          <li><a onclick="go('blog')">Blog</a></li>
+          <li><a onclick="go('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Popular Topics</h4>
+        <ul>
+          <li><a onclick="go('blog')">Mental Math Tricks</a></li>
+          <li><a onclick="go('blog')">Multiplication Tricks</a></li>
+          <li><a onclick="go('blog')">Vedic Math Tricks</a></li>
+          <li><a onclick="go('blog')">Percentage Tricks</a></li>
+          <li><a onclick="go('blog')">Math Tricks for Kids</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a onclick="go('privacy')">Privacy Policy</a></li>
+          <li><a onclick="go('terms')">Terms and Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Quick Math Tricks. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+// ===================== DATA =====================
+const articles = [
+  {
+    slug:"11-multiplication-trick",
+    cat:"Multiplication Tricks",
+    title:"The 11 Trick: Multiply Any 2-Digit Number Instantly",
+    excerpt:"Add the digits, drop the sum in the middle — and you've multiplied by 11.",
+    read:"4 min read",
+    eq:'<span class="hi">32</span> × 11 <span class="dim">=</span> <span class="hi">352</span>',
+    body:`
+      <p>Multiplying a two-digit number by 11 looks like a calculation you need to write down. But there is a surprisingly simple mental math trick that can make many of these calculations almost instant.</p>
+      <p>This is one of the easiest mental math tricks for students and beginners to learn because it relies on the digits already present in the number.</p>
+      <h2>The Basic Rule</h2>
+      <p>For a two-digit number <strong>AB</strong>, place the sum of A and B between the two digits.</p>
+      <div class="worked">32 × 11<br>3 + 2 = 5<br>Place 5 between 3 and 2 → <span class="res">352</span></div>
+      <h2>More Examples</h2>
+      <div class="worked">24 × 11 → 2+4=6 → <span class="res">264</span></div>
+      <div class="worked">53 × 11 → 5+3=8 → <span class="res">583</span></div>
+      <div class="worked">72 × 11 → 7+2=9 → <span class="res">792</span></div>
+      <h2>What Happens When the Sum Is 10 or More?</h2>
+      <p>This is where carrying is required.</p>
+      <div class="worked">57 × 11<br>5 + 7 = 12 → write 2, carry 1<br>5 + 1 = 6 → <span class="res">627</span></div>
+      <h2>Why Does the Trick Work?</h2>
+      <p>Since 11 = 10 + 1:</p>
+      <div class="worked">57 × 11 = 57 × (10+1) = 570 + 57 = <span class="res">627</span></div>
+      <div class="try-box"><strong>Try it yourself:</strong> What is 46 × 11?</div>
+      <h2>Practice Challenge</h2>
+      <details class="practice"><summary>21 × 11</summary><div class="ans">= 231</div></details>
+      <details class="practice"><summary>34 × 11</summary><div class="ans">= 374</div></details>
+      <details class="practice"><summary>46 × 11</summary><div class="ans">= 506</div></details>
+      <details class="practice"><summary>63 × 11</summary><div class="ans">= 693</div></details>
+      <details class="practice"><summary>78 × 11</summary><div class="ans">= 858</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Add the two digits, drop the result in the middle, and carry when the sum reaches double digits.</div>
+      <p>The 11 multiplication trick is a perfect introduction to mental math. Once students understand the pattern, multiplying many two-digit numbers by 11 becomes quick and easy.</p>
+    `,
+    related:["square-numbers-ending-in-5","mental-math-tricks-6th-graders"]
+  },
+  {
+    slug:"square-numbers-ending-in-5",
+    cat:"Vedic Math",
+    title:"How to Square Any Number Ending in 5",
+    excerpt:"Multiply by the next number up, tack on 25 — no calculator needed.",
+    read:"3 min read",
+    eq:'85<span class="dim">²</span> <span class="dim">=</span> <span class="hi">7,225</span>',
+    body:`
+      <p>Numbers ending in 5 have a special pattern that makes squaring them surprisingly easy. You do not need a calculator, long multiplication, or complicated formulas.</p>
+      <h2>The Simple Formula</h2>
+      <p>For a number ending in 5: remove the final 5, multiply the remaining number by the next consecutive number, then put <strong>25</strong> at the end.</p>
+      <h2>Example: 25²</h2>
+      <div class="worked">Remove 5 → 2<br>2 × 3 = 6<br>Attach 25 → <span class="res">625</span></div>
+      <h2>Example: 35²</h2>
+      <div class="worked">3 × 4 = 12 → attach 25 → <span class="res">1,225</span></div>
+      <h2>Example: 85²</h2>
+      <div class="worked">8 × 9 = 72 → attach 25 → <span class="res">7,225</span></div>
+      <h2>Why Does This Work?</h2>
+      <div class="worked">(10n + 5)² = 100n² + 100n + 25 = 100·n(n+1) + 25</div>
+      <div class="try-box"><strong>Try it yourself:</strong> What is 65²?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>15²</summary><div class="ans">= 225</div></details>
+      <details class="practice"><summary>45²</summary><div class="ans">= 2,025</div></details>
+      <details class="practice"><summary>55²</summary><div class="ans">= 3,025</div></details>
+      <details class="practice"><summary>65²</summary><div class="ans">= 4,225</div></details>
+      <details class="practice"><summary>95²</summary><div class="ans">= 9,025</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> n × (n+1), then append 25.</div>
+      <p>Once you recognize the pattern, squaring numbers ending in 5 becomes one of the most satisfying mental math shortcuts to use.</p>
+    `,
+    related:["11-multiplication-trick","1089-math-mystery"]
+  },
+  {
+    slug:"1089-math-mystery",
+    cat:"Math Magic",
+    title:"The 1089 Mystery: A Math Trick That Always Gives the Same Answer",
+    excerpt:"Pick a number, reverse it, subtract, reverse again, add — and land on 1089.",
+    read:"4 min read",
+    eq:'532 → 235 → 297 → 792 → <span class="hi">1089</span>',
+    body:`
+      <p>Want to perform a math trick that feels almost like mind reading? The 1089 trick is a classic mathematical pattern. When performed correctly with a suitable three-digit number, the calculation can lead to the same surprising result: <strong>1089</strong>.</p>
+      <h2>Step 1 — Choose a Three-Digit Number</h2>
+      <div class="worked">532 (first and last digit must differ)</div>
+      <h2>Step 2 — Reverse It</h2>
+      <div class="worked">532 → <span class="res">235</span></div>
+      <h2>Step 3 — Subtract</h2>
+      <div class="worked">532 − 235 = <span class="res">297</span></div>
+      <h2>Step 4 — Reverse the Answer</h2>
+      <div class="worked">297 → <span class="res">792</span></div>
+      <h2>Step 5 — Add</h2>
+      <div class="worked">297 + 792 = <span class="res">1089</span></div>
+      <h2>Try Another Example</h2>
+      <div class="worked">621 → 126 → 621−126=495 → 594 → 495+594 = <span class="res">1089</span></div>
+      <h2>Why Does the Trick Work?</h2>
+      <p>The pattern comes from the place-value structure created by reversing and subtracting three-digit numbers — it isn't supernatural, just a consistent mathematical result of that process.</p>
+      <h2>Important Conditions</h2>
+      <p>The trick works when the chosen number meets the required digit conditions; numbers that create leading zeros along the way need to be handled carefully.</p>
+      <div class="takeaway"><strong>Key takeaway:</strong> The 1089 trick is a great example of how mathematics can look like magic while actually being driven by patterns and place value.</div>
+    `,
+    related:["11-multiplication-trick","mental-math-tricks-6th-graders"]
+  },
+  {
+    slug:"mental-math-tricks-6th-graders",
+    cat:"Grade 6 Math",
+    title:"10 Mental Math Tricks Every 6th Grader Should Know",
+    excerpt:"Ten everyday shortcuts for addition, multiplication, and percentages.",
+    read:"6 min read",
+    eq:'36 × 5 <span class="dim">=</span> <span class="hi">180</span>',
+    body:`
+      <p>Sixth grade mathematics introduces students to increasingly complex calculations. Mental math can make many everyday calculations easier and help students develop number sense.</p>
+      <h2>1. Add 9 Quickly</h2>
+      <div class="worked">47 + 9 = 47 + 10 − 1 = <span class="res">56</span></div>
+      <h2>2. Subtract 9</h2>
+      <div class="worked">72 − 9 = 72 − 10 + 1 = <span class="res">63</span></div>
+      <h2>3. Multiply by 5</h2>
+      <div class="worked">36 × 5 = 360 ÷ 2 = <span class="res">180</span></div>
+      <h2>4. Multiply by 10</h2>
+      <div class="worked">4.7 × 10 = <span class="res">47</span></div>
+      <h2>5. Divide by 10</h2>
+      <div class="worked">85 ÷ 10 = <span class="res">8.5</span></div>
+      <h2>6. Multiply by 11</h2>
+      <div class="worked">32 × 11 = <span class="res">352</span></div>
+      <h2>7. Find 10% Quickly</h2>
+      <div class="worked">10% of 80 = <span class="res">8</span></div>
+      <h2>8. Find 5%</h2>
+      <div class="worked">10% = 8, so 5% = <span class="res">4</span></div>
+      <h2>9. Double and Halve</h2>
+      <div class="worked">25 × 16 → half 16=8, double 25=50 → 50 × 8 = <span class="res">400</span></div>
+      <h2>10. Look for Friendly Numbers</h2>
+      <div class="worked">49 + 37 = 50 + 37 − 1 = <span class="res">86</span></div>
+      <h2>Practice Challenge</h2>
+      <details class="practice"><summary>63 + 9</summary><div class="ans">= 72</div></details>
+      <details class="practice"><summary>81 − 9</summary><div class="ans">= 72</div></details>
+      <details class="practice"><summary>24 × 5</summary><div class="ans">= 120</div></details>
+      <details class="practice"><summary>15% of 40</summary><div class="ans">= 6</div></details>
+      <details class="practice"><summary>48 + 29</summary><div class="ans">= 77</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Mental math is not about rushing — it's about recognizing useful patterns. These ten techniques help build both speed and confidence.</div>
+    `,
+    related:["multiply-by-5-trick","percentage-tipping-trick"]
+  },
+  {
+    slug:"multiply-by-5-trick",
+    cat:"Multiplication Tricks",
+    title:"How to Multiply by 5 Without Doing Real Multiplication",
+    excerpt:"Multiply by 10, then cut in half — that's the whole trick.",
+    read:"3 min read",
+    eq:'48 × 5 <span class="dim">=</span> <span class="hi">240</span>',
+    body:`
+      <p>Multiplying by 5 can be much easier than it looks. Instead of performing traditional multiplication, you can use a simple relationship between 5, 10, and 2.</p>
+      <h2>The Main Trick</h2>
+      <p>To multiply a number by 5: <strong>multiply by 10, then divide by 2.</strong></p>
+      <div class="worked">48 × 5 → 48×10=480 → 480÷2 = <span class="res">240</span></div>
+      <div class="worked">76 × 5 → 760÷2 = <span class="res">380</span></div>
+      <h2>An Even Faster Method (Even Numbers)</h2>
+      <div class="worked">48 ÷ 2 = 24 → 24 × 10 = <span class="res">240</span></div>
+      <h2>What About Odd Numbers?</h2>
+      <div class="worked">37 × 5 → 370 ÷ 2 = <span class="res">185</span></div>
+      <div class="try-box"><strong>Try it yourself:</strong> What is 64 × 5?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>14 × 5</summary><div class="ans">= 70</div></details>
+      <details class="practice"><summary>22 × 5</summary><div class="ans">= 110</div></details>
+      <details class="practice"><summary>39 × 5</summary><div class="ans">= 195</div></details>
+      <details class="practice"><summary>64 × 5</summary><div class="ans">= 320</div></details>
+      <details class="practice"><summary>125 × 5</summary><div class="ans">= 625</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> ×5 is always ×10 then ÷2 (or ÷2 then ×10 for even numbers).</div>
+    `,
+    related:["mental-math-tricks-6th-graders","11-multiplication-trick"]
+  },
+  {
+    slug:"percentage-tipping-trick",
+    cat:"Percentage Tricks",
+    title:"The Percentage Trick That Makes Tipping Instant",
+    excerpt:"Build every percentage from 10% — tips, discounts, and more, in seconds.",
+    read:"4 min read",
+    eq:'20% of $75 <span class="dim">=</span> <span class="hi">$15</span>',
+    body:`
+      <p>Percentages appear everywhere — from shopping discounts to restaurant bills and everyday budgeting. Fortunately, some percentages can be calculated mentally in seconds.</p>
+      <h2>The 10% Trick</h2>
+      <p>Move the decimal point one place to the left.</p>
+      <div class="worked">10% of $80 = <span class="res">$8</span></div>
+      <h2>The 20% Trick</h2>
+      <div class="worked">10% = $8 → 20% = <span class="res">$16</span></div>
+      <h2>The 15% Trick</h2>
+      <div class="worked">For $60: 10%=$6, 5%=$3 → 15% = <span class="res">$9</span></div>
+      <h2>The 18% Trick</h2>
+      <div class="worked">For $50: 20%=$10, 2%=$1 → 18% = <span class="res">$9</span></div>
+      <h2>Example: A Restaurant Bill</h2>
+      <div class="worked">Bill: $75<br>20% tip: 10%=$7.50 → 20%=<span class="res">$15</span><br>15% tip: 10%=$7.50, 5%=$3.75 → <span class="res">$11.25</span></div>
+      <h2>Percentage Shortcuts Worth Remembering</h2>
+      <table class="pct">
+        <tr><th>Percentage</th><th>Easy Method</th></tr>
+        <tr><td>1%</td><td>Divide by 100</td></tr>
+        <tr><td>5%</td><td>Half of 10%</td></tr>
+        <tr><td>10%</td><td>Divide by 10</td></tr>
+        <tr><td>15%</td><td>10% + 5%</td></tr>
+        <tr><td>20%</td><td>Double 10%</td></tr>
+        <tr><td>25%</td><td>Divide by 4</td></tr>
+        <tr><td>50%</td><td>Divide by 2</td></tr>
+      </table>
+      <h2>Practice Challenge</h2>
+      <details class="practice"><summary>10% of $52</summary><div class="ans">= $5.20</div></details>
+      <details class="practice"><summary>20% of $32</summary><div class="ans">= $6.40</div></details>
+      <details class="practice"><summary>15% of $60</summary><div class="ans">= $9</div></details>
+      <details class="practice"><summary>25% of $80</summary><div class="ans">= $20</div></details>
+      <details class="practice"><summary>18% of $50</summary><div class="ans">= $9</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Learn 10% first, then build 5%, 15%, 20%, and 25% from it.</div>
+    `,
+    related:["mental-math-tricks-6th-graders","multiply-by-5-trick"]
+  },
+  {
+    slug:"9-multiplication-trick",
+    cat:"Multiplication Tricks",
+    title:"The 9 Trick: Multiply Any Number by 9 Instantly",
+    excerpt:"Multiply by 10, then subtract the original number — that's the whole shortcut.",
+    read:"3 min read",
+    eq:'47 × 9 <span class="dim">=</span> <span class="hi">423</span>',
+    body:`
+      <p>Multiplying by 9 feels harder than it is, mostly because 9 sits right next to a much friendlier number: 10.</p>
+      <h2>The Main Trick</h2>
+      <p>To multiply any number by 9: <strong>multiply by 10, then subtract the original number.</strong></p>
+      <div class="worked">47 × 9 → 47×10=470 → 470−47 = <span class="res">423</span></div>
+      <div class="worked">83 × 9 → 830−83 = <span class="res">747</span></div>
+      <h2>Why Does This Work?</h2>
+      <div class="worked">9 = 10 − 1, so n × 9 = n×10 − n</div>
+      <h2>A Finger-Counting Bonus (1–10 only)</h2>
+      <p>For 9 × 1 through 9 × 10, hold up 10 fingers and fold down the finger matching the number you're multiplying by. The fingers to the left of the fold are the tens digit; the fingers to the right are the ones digit.</p>
+      <div class="worked">9 × 4 → fold the 4th finger → 3 fingers left, 6 fingers right → <span class="res">36</span></div>
+      <div class="try-box"><strong>Try it yourself:</strong> What is 9 × 62?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>9 × 12</summary><div class="ans">= 108</div></details>
+      <details class="practice"><summary>9 × 25</summary><div class="ans">= 225</div></details>
+      <details class="practice"><summary>9 × 34</summary><div class="ans">= 306</div></details>
+      <details class="practice"><summary>9 × 62</summary><div class="ans">= 558</div></details>
+      <details class="practice"><summary>9 × 71</summary><div class="ans">= 639</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> ×9 is always ×10 minus the original number.</div>
+    `,
+    related:["multiply-by-5-trick","11-multiplication-trick"]
+  },
+  {
+    slug:"multiplying-near-100",
+    cat:"Vedic Math",
+    title:"Multiplying Two Numbers Near 100 — the Vedic Shortcut",
+    excerpt:"A classic Vedic math method for multiplying numbers close to 100, done almost entirely in your head.",
+    read:"5 min read",
+    eq:'96 × 97 <span class="dim">=</span> <span class="hi">9,312</span>',
+    body:`
+      <p>This technique comes from Vedic mathematics and works beautifully when both numbers you're multiplying are close to 100 — a common case in mental estimation and percentage-style problems.</p>
+      <h2>The Method</h2>
+      <p>For each number, find how far below 100 it is (its "deficiency"). Then:</p>
+      <ol>
+        <li>Cross-subtract: take one number and subtract the other number's deficiency (this gives the first part of the answer).</li>
+        <li>Multiply the two deficiencies together (this gives the last part of the answer, padded to two digits).</li>
+      </ol>
+      <h2>Example: 96 × 97</h2>
+      <div class="worked">Deficiencies: 100−96=4, 100−97=3<br>Cross-subtract: 96 − 3 = 93 (or 97 − 4 = 93)<br>Multiply deficiencies: 4 × 3 = 12<br>Combine: 93 and 12 → <span class="res">9,312</span></div>
+      <h2>Example: 88 × 98</h2>
+      <div class="worked">Deficiencies: 12 and 2<br>Cross-subtract: 88 − 2 = 86<br>Multiply deficiencies: 12 × 2 = 24<br>Combine: 86 and 24 → <span class="res">8,624</span></div>
+      <h2>Why Does This Work?</h2>
+      <p>Writing each number as 100 minus its deficiency and expanding the product algebraically produces exactly this shortcut — the cross-subtraction and the deficiency product are just an organized way of doing that expansion mentally.</p>
+      <div class="try-box"><strong>Try it yourself:</strong> What is 94 × 96?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>98 × 96</summary><div class="ans">= 9,408</div></details>
+      <details class="practice"><summary>94 × 96</summary><div class="ans">= 9,024</div></details>
+      <details class="practice"><summary>89 × 99</summary><div class="ans">= 8,811</div></details>
+      <details class="practice"><summary>97 × 92</summary><div class="ans">= 8,924</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Cross-subtract a deficiency for the first part, multiply the deficiencies for the last part.</div>
+    `,
+    related:["square-numbers-ending-in-5","9-multiplication-trick"]
+  },
+  {
+    slug:"instant-discount-trick",
+    cat:"Percentage Tricks",
+    title:"The Instant Discount Trick: Calculate Any Sale Price in Seconds",
+    excerpt:"Skip the two-step math — find what you'll actually pay in one move.",
+    read:"3 min read",
+    eq:'$60 <span class="dim">−</span> 30% <span class="dim">=</span> <span class="hi">$42</span>',
+    body:`
+      <p>When something is on sale, most people calculate the discount, then subtract it from the price. There's a faster way: calculate what you'll actually pay, directly.</p>
+      <h2>The Shortcut</h2>
+      <p>Instead of finding the discount and subtracting, find the percentage you'll <strong>keep</strong> and apply that directly to the price.</p>
+      <div class="worked">30% off means you pay 70%<br>$60 × 70% → 10% of 60 = 6 → 70% = 7 × 6 = <span class="res">$42</span></div>
+      <h2>Example: 25% Off</h2>
+      <div class="worked">25% off means you pay 75%<br>$80 × 75% → 25% of 80 = 20 → 80 − 20 = <span class="res">$60</span></div>
+      <h2>Example: 40% Off</h2>
+      <div class="worked">40% off means you pay 60%<br>$45 × 60% → 10% of 45 = 4.5 → 60% = 6 × 4.5 = <span class="res">$27</span></div>
+      <div class="try-box"><strong>Try it yourself:</strong> An item is $90 with 20% off. What do you pay?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>$50 at 30% off</summary><div class="ans">= $35</div></details>
+      <details class="practice"><summary>$90 at 20% off</summary><div class="ans">= $72</div></details>
+      <details class="practice"><summary>$120 at 25% off</summary><div class="ans">= $90</div></details>
+      <details class="practice"><summary>$40 at 50% off</summary><div class="ans">= $20</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Calculate what you pay (100% − discount%) directly, instead of calculating the discount first.</div>
+    `,
+    related:["percentage-tipping-trick","mental-math-tricks-6th-graders"]
+  },
+  {
+    slug:"divisibility-tricks",
+    cat:"Mental Math",
+    title:"Quick Division Tricks: Spot Divisibility Instantly",
+    excerpt:"Know whether a number divides evenly by 2, 3, 5, 9, or 10 without doing the division at all.",
+    read:"4 min read",
+    eq:'<span class="hi">432</span> <span class="dim">÷</span> 9 <span class="dim">=</span> <span class="hi">exact</span>',
+    body:`
+      <p>Before dividing a number, it helps to know whether it will divide evenly at all. These quick checks let you answer that in seconds, just by looking at the digits.</p>
+      <h2>Divisible by 2</h2>
+      <p>The number ends in 0, 2, 4, 6, or 8.</p>
+      <div class="worked">348 → ends in 8 → <span class="res">divisible by 2</span></div>
+      <h2>Divisible by 3</h2>
+      <p>Add up all the digits. If that sum is divisible by 3, so is the original number.</p>
+      <div class="worked">432 → 4+3+2=9 → 9 is divisible by 3 → <span class="res">432 is divisible by 3</span></div>
+      <h2>Divisible by 5</h2>
+      <p>The number ends in 0 or 5.</p>
+      <div class="worked">235 → ends in 5 → <span class="res">divisible by 5</span></div>
+      <h2>Divisible by 9</h2>
+      <p>Add up all the digits. If that sum is divisible by 9, so is the original number.</p>
+      <div class="worked">432 → 4+3+2=9 → <span class="res">divisible by 9</span></div>
+      <h2>Divisible by 10</h2>
+      <p>The number ends in 0.</p>
+      <div class="worked">670 → ends in 0 → <span class="res">divisible by 10</span></div>
+      <h2>Why Does the Digit-Sum Rule Work?</h2>
+      <p>Every power of 10 leaves a remainder of 1 when divided by 3 or 9, so a number's remainder when divided by 3 or 9 is the same as its digit sum's remainder — which is why checking the digit sum works as a shortcut.</p>
+      <div class="try-box"><strong>Try it yourself:</strong> Is 522 divisible by 3? By 9?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>Is 141 divisible by 3?</summary><div class="ans">1+4+1=6, yes</div></details>
+      <details class="practice"><summary>Is 522 divisible by 9?</summary><div class="ans">5+2+2=9, yes</div></details>
+      <details class="practice"><summary>Is 815 divisible by 5?</summary><div class="ans">ends in 5, yes</div></details>
+      <details class="practice"><summary>Is 246 divisible by 2?</summary><div class="ans">ends in 6, yes</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Check the last digit for 2, 5, and 10; check the digit sum for 3 and 9.</div>
+    `,
+    related:["9-multiplication-trick","mental-math-tricks-6th-graders"]
+  },
+  {
+    slug:"fraction-to-percent-trick",
+    cat:"Grade 7 Math",
+    title:"The Fraction-to-Percent Shortcut Every 7th Grader Should Know",
+    excerpt:"Turn common fractions into percentages instantly by memorizing a handful of benchmarks.",
+    read:"4 min read",
+    eq:'3/4 <span class="dim">=</span> <span class="hi">75%</span>',
+    body:`
+      <p>Converting a fraction to a percentage usually means dividing and multiplying by 100. But a handful of common fractions come up so often that memorizing their percentage equivalents makes conversion instant.</p>
+      <h2>The Core Benchmarks</h2>
+      <table class="pct">
+        <tr><th>Fraction</th><th>Percentage</th></tr>
+        <tr><td>1/2</td><td>50%</td></tr>
+        <tr><td>1/4</td><td>25%</td></tr>
+        <tr><td>3/4</td><td>75%</td></tr>
+        <tr><td>1/5</td><td>20%</td></tr>
+        <tr><td>1/3</td><td>33.3%</td></tr>
+        <tr><td>2/3</td><td>66.7%</td></tr>
+        <tr><td>1/10</td><td>10%</td></tr>
+        <tr><td>1/8</td><td>12.5%</td></tr>
+      </table>
+      <h2>Building Other Fractions From These</h2>
+      <div class="worked">3/5 = 1/5 × 3 → 20% × 3 = <span class="res">60%</span></div>
+      <div class="worked">5/8 = 1/8 × 5 → 12.5% × 5 = <span class="res">62.5%</span></div>
+      <h2>Example: A Test Score</h2>
+      <div class="worked">18 out of 24 correct → 18/24 = 3/4 → <span class="res">75%</span></div>
+      <div class="try-box"><strong>Try it yourself:</strong> What percentage is 5/6?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>What is 2/5 as a percent?</summary><div class="ans">= 40%</div></details>
+      <details class="practice"><summary>What is 7/8 as a percent?</summary><div class="ans">= 87.5%</div></details>
+      <details class="practice"><summary>What is 5/6 as a percent?</summary><div class="ans">≈ 83.3%</div></details>
+      <details class="practice"><summary>21 out of 28 as a percent?</summary><div class="ans">21/28 = 3/4 = 75%</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Memorize the core benchmarks, then scale them up to reach any related fraction.</div>
+    `,
+    related:["percentage-tipping-trick","instant-discount-trick"]
+  },
+  {
+    slug:"adding-fractions-bowtie",
+    cat:"Math for Beginners",
+    title:"Adding and Subtracting Fractions Fast: The Bowtie Method",
+    excerpt:"A visual shortcut for combining two fractions with different denominators in one pass.",
+    read:"3 min read",
+    eq:'1/3 <span class="dim">+</span> 1/4 <span class="dim">=</span> <span class="hi">7/12</span>',
+    body:`
+      <p>Adding fractions with different denominators normally means finding a common denominator first. The "bowtie" method combines that whole process into one crossing pattern.</p>
+      <h2>The Method</h2>
+      <p>For two fractions a/b and c/d: cross-multiply diagonally to get the new numerators, multiply the two denominators together to get the new denominator, then add or subtract across the top.</p>
+      <div class="worked">1/3 + 1/4<br>Cross-multiply: 1×4=4, and 1×3=3<br>Multiply denominators: 3×4=12<br>Add: 4+3=7 → <span class="res">7/12</span></div>
+      <h2>Example: Subtraction</h2>
+      <div class="worked">2/3 − 1/5<br>Cross-multiply: 2×5=10, and 1×3=3<br>Multiply denominators: 3×5=15<br>Subtract: 10−3=7 → <span class="res">7/15</span></div>
+      <h2>Don't Forget to Simplify</h2>
+      <div class="worked">1/2 + 1/4 → 4+2=6, denominator 8 → 6/8 → simplify → <span class="res">3/4</span></div>
+      <div class="try-box"><strong>Try it yourself:</strong> What is 2/5 + 1/3?</div>
+      <h2>Practice</h2>
+      <details class="practice"><summary>1/2 + 1/3</summary><div class="ans">= 5/6</div></details>
+      <details class="practice"><summary>3/4 − 1/5</summary><div class="ans">= 11/20</div></details>
+      <details class="practice"><summary>2/5 + 1/3</summary><div class="ans">= 11/15</div></details>
+      <div class="takeaway"><strong>Key takeaway:</strong> Cross-multiply for the numerators, multiply straight across for the denominator, then simplify.</div>
+    `,
+    related:["fraction-to-percent-trick","mental-math-tricks-6th-graders"]
+  }
+];
+
+// ===================== RENDER HELPERS =====================
+function trickCardHTML(a){
+  return `<div class="trick-card">
+    <div class="thumb"><div class="calc-display"><span class="eq-line">${a.eq}</span></div></div>
+    <div class="body">
+      <div class="cat-tag">${a.cat}</div>
+      <h3>${a.title}</h3>
+      <p>${a.excerpt}</p>
+      <div class="meta-row"><span>${a.read}</span></div>
+      <a class="read-link" onclick="openArticle('${a.slug}')">Learn the Trick →</a>
+    </div>
+  </div>`;
+}
+
+document.getElementById('featuredGrid').innerHTML = articles.slice(0,6).map(trickCardHTML).join('');
+document.getElementById('latestGrid').innerHTML = articles.slice(-3).map(trickCardHTML).join('');
+
+// blog page with filters
+const categories = ["All", ...new Set(articles.map(a=>a.cat))];
+function renderFilters(active){
+  document.getElementById('filterRow').innerHTML = categories.map(c=>
+    `<button class="${c===active?'active':''}" onclick="filterBlog('${c}')">${c}</button>`
+  ).join('');
+}
+function filterBlog(cat){
+  renderFilters(cat);
+  const list = cat==="All" ? articles : articles.filter(a=>a.cat===cat);
+  document.getElementById('blogGrid').innerHTML = list.map(trickCardHTML).join('');
+}
+renderFilters("All");
+filterBlog("All");
+
+function openArticle(slug){
+  const a = articles.find(x=>x.slug===slug);
+  if(!a) return;
+  document.getElementById('artCrumb').textContent = a.title;
+  document.getElementById('artTitle').textContent = a.title;
+  const relatedHTML = a.related.map(s=>{
+    const r = articles.find(x=>x.slug===s);
+    return r ? `<a onclick="openArticle('${r.slug}')">${r.title}</a>` : '';
+  }).join('');
+  document.getElementById('artBody').innerHTML = a.body + `
+    <div class="related-box">
+      <h4>Related Tricks</h4>
+      <div class="related-links">${relatedHTML}</div>
+    </div>`;
+  go('article', true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+// ===================== ROUTING =====================
+function go(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+pageId).classList.add('active');
+  document.querySelectorAll('nav.links button[data-page]').forEach(b=>{
+    b.classList.toggle('current', b.dataset.page===pageId);
+  });
+  if(pageId!=='article') window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('navLinks').style.display='';
+}
+function toggleMobileNav(){
+  const nav = document.getElementById('navLinks');
+  nav.style.display = (nav.style.display==='flex') ? 'none' : 'flex';
+  nav.style.flexDirection='column';
+  nav.style.position='absolute';
+  nav.style.top='64px';
+  nav.style.right='0';
+  nav.style.left='0';
+  nav.style.background='#fff';
+  nav.style.padding='16px 24px';
+  nav.style.borderBottom='1px solid var(--line)';
+}
+</script>
+</body>
+</html>
