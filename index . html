@@ -993,3 +993,49 @@ function toggleMobileNav(){
 </script>
 </body>
 </html>
+
+filterBlog("All");
+ 
+function openArticle(slug){
+  const a = articles.find(x=>x.slug===slug);
+  if(!a) return;
+  document.getElementById('artCrumb').textContent = a.title;
+  document.getElementById('artTitle').textContent = a.title;
+  const relatedHTML = a.related.map(s=>{
+    const r = articles.find(x=>x.slug===s);
+    return r ? `<a onclick="openArticle('${r.slug}')">${r.title}</a>` : '';
+  }).join('');
+  document.getElementById('artBody').innerHTML = a.body + `
+    <div class="related-box">
+      <h4>Related Tricks</h4>
+      <div class="related-links">${relatedHTML}</div>
+    </div>`;
+  go('article', true);
+  window.scrollTo({top:0,behavior:'instant'});
+}
+ 
+// ===================== ROUTING =====================
+function go(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+pageId).classList.add('active');
+  document.querySelectorAll('nav.links button[data-page]').forEach(b=>{
+    b.classList.toggle('current', b.dataset.page===pageId);
+  });
+  if(pageId!=='article') window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('navLinks').style.display='';
+}
+function toggleMobileNav(){
+  const nav = document.getElementById('navLinks');
+  nav.style.display = (nav.style.display==='flex') ? 'none' : 'flex';
+  nav.style.flexDirection='column';
+  nav.style.position='absolute';
+  nav.style.top='64px';
+  nav.style.right='0';
+  nav.style.left='0';
+  nav.style.background='#fff';
+  nav.style.padding='16px 24px';
+  nav.style.borderBottom='1px solid var(--line)';
+}
+</script>
+</body>
+</html>
